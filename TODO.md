@@ -16,3 +16,6 @@ Some functions that might help you are numpy.std, numpy.mean, and numpy.asarray.
 
 Start collecting data after that! The actual implementation is up to you.
 Just ensure good robot citizenship. We don't want to launch DoS attacks or get banned.
+
+I would recommend doing it on a separate python script and call the userToVec function.
+But do whatever works best for you.
