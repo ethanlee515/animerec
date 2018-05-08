@@ -7,7 +7,7 @@ The command below should allow you to clone a copy of the repo.
 git clone https://github.com/ethanlee515/animerec
 
 I'll give you push/edit privilege later if/when you create a github account.
-Or just get the edited stuff to me in a .zip or .tar.gz, it's whatever.
+Or just get your code to me in a .zip or .tar.gz, it's whatever.
 
 ## Familiarize yourself
 
