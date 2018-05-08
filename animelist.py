@@ -11,7 +11,7 @@ def getTitle(id):
 
 def getJson(html):
     p_json = r'data-items="([^"]*)">'
-    return json.loads(re.findall(p_json, html)[0].replace(r'\/', '/').replace(r'&quot;', '"'))
+    return json.loads(re.findall(p_json, html)[0].replace(r'&quot;', '"'))
 
 def makeVec(json):
     scores = dict()
