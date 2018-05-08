@@ -2,6 +2,7 @@ import re
 import requests
 import json
 import pprint
+import sys
 
 def getTitle(id):
     s = requests.get("https://myanimelist.net/anime/" + str(id)).text
@@ -31,8 +32,11 @@ def userToVec(username):
     return makeVec(getJson(s))
 
 if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("usage: python3 animelist.py username")
+        exit(0)
     pp = pprint.PrettyPrinter(indent=4)
-    vec = userToVec("ethan515")
+    vec = userToVec(sys.argv[1])
     pp.pprint(vec)
 
 # print(getTitle(28819))
