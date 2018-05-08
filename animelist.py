@@ -19,6 +19,7 @@ def makeVec(json):
         if score != 0:
             scores['anime_id'] = score
     # TODO normalize and make z-scores
+    
     return scores
 
 #TODO rewrite me
