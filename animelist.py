@@ -26,10 +26,10 @@ def makeVec(json):
 def userToVec(username):
     try:
         s = requests.get("https://myanimelist.net/animelist/" + username + "?status=7").text
+        return makeVec(getJson(s))
     except Exception:
-        print("Dead link: " + username)
+        print("Can't extract: " + username)
         return dict()
-    return makeVec(getJson(s))
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
