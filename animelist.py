@@ -22,7 +22,6 @@ def makeVec(json):
 
     return scores
 
-#TODO rewrite me
 def userToVec(username):
     try:
         s = requests.get("https://myanimelist.net/animelist/" + username + "?status=7").text
