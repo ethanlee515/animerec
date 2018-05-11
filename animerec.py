@@ -50,7 +50,9 @@ for name in users:
     mean = numpy.mean(arr)
     sdev = numpy.std(arr)
     for animeID in vec:
-        vec[animeID] = (vec[animeID] - mean) / sdev
+        vec[animeID] -= mean
+        if sdev != 0:
+            vec[animeID] /= sdev
 
 similarUsers = rankings.rankings(20)
 
@@ -74,6 +76,6 @@ for anime in prediction:
 
 for i in bestAnimes.getList():
     print(i)
-    print(animelist.getTitle(i))
+#    print(animelist.getTitle(i))
     
 
