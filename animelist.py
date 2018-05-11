@@ -19,8 +19,6 @@ def makeVec(json):
         score = anime['score']
         if score != 0:
             scores[anime['anime_id']] = score
-    # TODO normalize and make z-scores
-
     return scores
 
 def userToVec(username):
@@ -39,5 +37,3 @@ if __name__ == "__main__":
     vec = userToVec(sys.argv[1])
     pp.pprint(vec)
 
-# print(getTitle(28819))
-# print(getTitle(36456))
