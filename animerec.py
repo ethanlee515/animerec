@@ -13,13 +13,6 @@ if len(sys.argv) != 3:
     print("usage: animerec username dataset")
     exit(0)
 
-username = sys.argv[1]
-uservec = animelist.userToVec(username)
-
-if uservec == {}:
-    print("cannot find " + username + " on MyAnimeList")
-    exit(0)
-
 def dot(v1, v2):
     s = 0
     for key in v1:
@@ -33,16 +26,9 @@ def cos_sim(v1, v2):
         return 0
     return d / sqrt(dot(v1, v1) * dot(v2, v2))
 
-sim = dot #TODO command line flag
-
-with open(sys.argv[2]) as f:
-    users = json.load(f)
-
-# normalize
-for name in users:
-    vec = users[name]
+def normalize(vec):
     if vec == {}:
-        continue
+        return
     ratings = list()
     for animeID in vec:
         ratings.append(vec[animeID])
@@ -50,17 +36,34 @@ for name in users:
     mean = numpy.mean(arr)
     sdev = numpy.std(arr)
     for animeID in vec:
-        vec[animeID] -= mean
-        if sdev != 0:
-            vec[animeID] /= sdev
+        if sdev == 0:
+            vec[animeID] = 0
+        else:
+            vec[animeID] = (vec[animeID] - mean) / sdev
 
-similarUsers = rankings.rankings(20)
+sim = dot #TODO command line flag
+
+x = animelist.userToVec(sys.argv[1])
+
+if x == {}:
+    print("cannot find " + sys.argv[1] + " on MyAnimeList")
+    exit(0)
+
+normalize(x)
+
+with open(sys.argv[2]) as f:
+    users = json.load(f)
 
 for name in users:
-    if name == username:
+    normalize(users[name])
+
+similarUsers = rankings.rankings(10)
+
+for name in users:
+    if name == sys.argv[1]:
         continue
-    vec = users[name]
-    similarUsers.insert(vec, sim(vec, uservec))
+    v = users[name]
+    similarUsers.insert(v, sim(v, x))
 
 prediction = dict()
 for vec in similarUsers.getList():
@@ -75,7 +78,7 @@ for anime in prediction:
     bestAnimes.insert(anime, prediction[anime])
 
 for i in bestAnimes.getList():
-    print(i)
-#    print(animelist.getTitle(i))
-    
+    print("https://myanimelist.net/anime/" + str(i))
+    print(animelist.getTitle(i))
+
 
