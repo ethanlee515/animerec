@@ -50,7 +50,7 @@ for animeID in x0:
 
 if predictID is not None:
     if predictID in x:
-        print("Let's pretend you hadn't watched it before...")
+        print("You've given it a rating of " + str(x[predictID]) + ". Now let's pretend you hadn't watched it...")
         del x[predictID]
 
 mean, sdev = normalize(x)
