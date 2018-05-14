@@ -60,7 +60,6 @@ for name in users:
         continue
     v = users[name]
     similarUsers.insert(v, dot(v, x))
-    print(dot(v, x))
 
 scores = dict()
 for vec in similarUsers.getList():
