@@ -28,3 +28,5 @@ with open(sys.argv[2], "w+") as f:
             d[user] = animelist.userToVec(user)
     json.dump(d, f)
 
+print("total users collected: " + str(len(d)))
+
