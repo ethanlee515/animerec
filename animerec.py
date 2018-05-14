@@ -88,7 +88,7 @@ if predictID is not None:
     score = scores[predictID]
     if score.count < critical_popularity:
         print("Unpopular series; take prediction with a grain of salt.")
-    print("predicted rating: " + str(mean + sdev * score.value / score.count))
+    print("predicted rating: " + f'{(mean + sdev * score.value / score.count):.2f}')
 else:
     # store up to 40 potential recommendations
     bestAnimes = rankings.rankings(40)
