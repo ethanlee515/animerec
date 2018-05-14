@@ -8,9 +8,10 @@ import rankings
 import json
 import animelist
 import numpy
+import types
 
-if len(sys.argv) != 3:
-    print("usage: animerec username dataset")
+if len(sys.argv) != 2:
+    print("usage: animerec username")
     exit(0)
 
 def dot(v1, v2):
@@ -19,12 +20,6 @@ def dot(v1, v2):
         if key in v2:
             s += v1[key] * v2[key]
     return s
-
-def cos_sim(v1, v2):
-    d = dot(v1, v2)
-    if d == 0:
-        return 0
-    return d / sqrt(dot(v1, v1) * dot(v2, v2))
 
 def normalize(vec):
     if vec == {}:
@@ -41,9 +36,10 @@ def normalize(vec):
         else:
             vec[animeID] = (vec[animeID] - mean) / sdev
 
-sim = dot #TODO command line flag
-
-x = animelist.userToVec(sys.argv[1])
+x0 = animelist.userToVec(sys.argv[1])
+x = dict()
+for animeID in x0:
+    x[str(animeID)] = x0[animeID]
 
 if x == {}:
     print("cannot find " + sys.argv[1] + " on MyAnimeList")
@@ -51,34 +47,42 @@ if x == {}:
 
 normalize(x)
 
-with open(sys.argv[2]) as f:
+with open("vecs.json") as f:
     users = json.load(f)
 
 for name in users:
     normalize(users[name])
 
-similarUsers = rankings.rankings(10)
+similarUsers = rankings.rankings(30)
 
 for name in users:
     if name == sys.argv[1]:
         continue
     v = users[name]
-    similarUsers.insert(v, sim(v, x))
+    similarUsers.insert(v, dot(v, x))
+    print(dot(v, x))
 
-prediction = dict()
+scores = dict()
 for vec in similarUsers.getList():
     for animeID in vec:
-        if animeID in prediction:
-            prediction[animeID] += vec[animeID]
+        if animeID in scores:
+            scores[animeID].value += vec[animeID]
+            scores[animeID].count += 1
         else:
-            prediction[animeID] = vec[animeID]
+            scores[animeID] = types.SimpleNamespace(value=vec[animeID], count=1)
 
-bestAnimes = rankings.rankings(5)
-for anime in prediction:
-    bestAnimes.insert(anime, prediction[anime])
+bestAnimes = rankings.rankings(40)
+for animeID in scores:
+    score = scores[animeID]
+    if score.count >= 10:
+        bestAnimes.insert(animeID, score.value / score.count)
 
-for i in bestAnimes.getList():
-    print("https://myanimelist.net/anime/" + str(i))
-    print(animelist.getTitle(i))
-
-
+outputted = 0
+for animeID in bestAnimes.getList():
+    if outputted >= 5:
+        break
+    if animeID in x:
+        continue
+    print("https://myanimelist.net/anime/" + animeID)
+    print(animelist.getTitle(animeID))
+    outputted += 1
