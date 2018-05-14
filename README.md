@@ -21,11 +21,9 @@ vector, and each series they have watched is represented as a component of their
 of the component being the rating they gave for that series. We will retrieve user ratings from
 Myanimelist.net. The generation of recommendations will be done by finding the user vectors that are
 closest neighbors to the target vector, and then predicting the rating that the target user might give to
-series they haven’t watched based on the average rating given by those neighbors to those series.
-The default method of calculating similarity will be dot-product, as it is not sensitive to the norm of the
-vector, which represents the number of series a user has watched. We will also give people the option
-to use cosine similarity instead, which will instead cause the closest neighbors to become the users who
-have also watched a similar number of series to the target user.
+series they haven’t watched based on the (normalized) average rating given by those neighbors to those series.
+The method of calculating similarity will be dot-product, as it is not sensitive to the norm of the
+vector, which represents the number of series a user has watched.
 
 ## Evaluation
 
