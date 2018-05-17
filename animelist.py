@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+"""
+This module interfaces with MyAnimeList.net
+"""
+
 import re
 import requests
 import json
@@ -6,6 +11,7 @@ import sys
 import time
 
 def getTitle(id, sleeptime = 0):
+    """Converts an anime ID to the corresponding title."""
     time.sleep(sleeptime)
     s = requests.get("https://myanimelist.net/anime/" + str(id)).text
     p_title = r'<span itemprop="name">(.*)</span'
@@ -15,10 +21,12 @@ def getTitle(id, sleeptime = 0):
         return getTitle(id, sleeptime + 1)
 
 def getJson(html):
+    """Extracts the user data JSON from an MyAnimeList profile page in HTML."""
     p_json = r'data-items="([^"]*)">'
     return json.loads(re.findall(p_json, html)[0].replace(r'&quot;', '"'))
 
 def makeVec(json):
+    """Parsing some user data JSON into the corresponding vector"""
     scores = dict()
     for anime in json:
         score = anime['score']
@@ -27,6 +35,7 @@ def makeVec(json):
     return scores
 
 def userToVec(username):
+    """Converts some username to the corresponding vector"""
     try:
         s = requests.get("https://myanimelist.net/animelist/" + username + "?status=7").text
         return makeVec(getJson(s))

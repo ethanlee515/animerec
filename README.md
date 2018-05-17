@@ -5,6 +5,16 @@
 - Wai-Kin Tsui
 - Ethan (Yi) Lee
 
+## How to run
+
+Two usages.
+* `./animerec.py <username>` (I.e.: `./animerec.py ethan515`)
+Prints the top five recommendations for a user.
+* `./animerec.py <username> <series ID>` (I.e.: `./animerec.py ethan515 23273`)
+Predicts the rating a given user would give to a series.
+The series ID being the number in the URL of the MyAnimeList page for the series.
+This could be used for evaluation purposes.
+
 ## Abstract
 
 For our final project, we plan to set up a recommendation system for anime television series based on
@@ -38,10 +48,3 @@ crawled by the website’s robots.txt file. We will aim to extract approximately
 which would be equivalent to roughly 50 profiles per hour, or less than one user per minute on average,
 which is comparable to, if not slower than, what a human would be expected to be able to do. We will
 access the website once every 10 minutes, each time extracting at most 20 profiles.
-
-## How to run code
-
-The default method of running the code is as follows: ./animerec.py <username>
-In order to evaluate the success of the code, the predicted rating and actual rating of a series
-for a given user can be compared as follows: ./animerec.py <username> <series ID>
-with the series ID being the number in the URL of the MyAnimeList page for the series.

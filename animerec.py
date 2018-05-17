@@ -10,6 +10,10 @@ import animelist
 import numpy
 import types
 
+"""
+Main executable. See README.md for details.
+"""
+
 if len(sys.argv) < 2 or len(sys.argv) > 3:
     print("usage: animerec username [animeID]")
     exit(0)
@@ -17,6 +21,7 @@ if len(sys.argv) < 2 or len(sys.argv) > 3:
 predictID = sys.argv[2] if len(sys.argv) == 3 else None
 
 def dot(v1, v2):
+    """Dot product implementation"""
     s = 0
     for key in v1:
         if key in v2:
@@ -24,6 +29,7 @@ def dot(v1, v2):
     return s
 
 def normalize(vec):
+    """Normalize a vector by computing z-scores"""
     if vec == {}:
         return
     ratings = list()
