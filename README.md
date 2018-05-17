@@ -51,6 +51,6 @@ access the website once every 10 minutes, each time extracting at most 20 profil
 
 ## Future Directions
 
-It might be nice to explore something in the spirit of IDF-weighing.
+It could be nice to explore something similar to IDF-weighing.
 That is, possibly assign popular series lower weights for the closest-neighbors
 algorithm and see if it improves the evaluation.
