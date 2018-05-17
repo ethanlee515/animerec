@@ -3,11 +3,16 @@ import requests
 import json
 import pprint
 import sys
+import time
 
-def getTitle(id):
+def getTitle(id, sleeptime = 0):
+    time.sleep(sleeptime)
     s = requests.get("https://myanimelist.net/anime/" + str(id)).text
     p_title = r'<span itemprop="name">(.*)</span'
-    return re.findall(p_title, s)[0]
+    try:
+        return re.findall(p_title, s)[0]
+    except IndexError:
+        return getTitle(id, sleeptime + 1)
 
 def getJson(html):
     p_json = r'data-items="([^"]*)">'
@@ -26,7 +31,7 @@ def userToVec(username):
         s = requests.get("https://myanimelist.net/animelist/" + username + "?status=7").text
         return makeVec(getJson(s))
     except Exception:
-        print("Can't extract: " + username)
+        print("Can't extract username: " + username)
         return dict()
 
 if __name__ == "__main__":
@@ -36,4 +41,3 @@ if __name__ == "__main__":
     pp = pprint.PrettyPrinter(indent=4)
     vec = userToVec(sys.argv[1])
     pp.pprint(vec)
-

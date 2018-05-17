@@ -38,3 +38,10 @@ crawled by the website’s robots.txt file. We will aim to extract approximately
 which would be equivalent to roughly 50 profiles per hour, or less than one user per minute on average,
 which is comparable to, if not slower than, what a human would be expected to be able to do. We will
 access the website once every 10 minutes, each time extracting at most 20 profiles.
+
+## How to run code
+
+The default method of running the code is as follows: ./animerec.py <username>
+In order to evaluate the success of the code, the predicted rating and actual rating of a series
+for a given user can be compared as follows: ./animerec.py <username> <series ID>
+with the series ID being the number in the URL of the MyAnimeList page for the series.

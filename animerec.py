@@ -41,7 +41,7 @@ def normalize(vec):
 
 x0 = animelist.userToVec(sys.argv[1])
 if x0 == {}:
-    print("cannot find " + sys.argv[1] + " on MyAnimeList")
+    print("Cannot find " + sys.argv[1] + " on MyAnimeList")
     exit(0)
 
 x = dict()
@@ -50,7 +50,7 @@ for animeID in x0:
 
 if predictID is not None:
     if predictID in x:
-        print("You've given it a rating of " + str(x[predictID]) + ". Now let's pretend you hadn't watched it...")
+        print("You've given it a rating of " + str(x[predictID]) + ". Now let's pretend you haven't watched it...")
         del x[predictID]
 
 mean, sdev = normalize(x)
