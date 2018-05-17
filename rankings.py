@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-
+"""Specialized data structure to make sure the search runs in linear time"""
 import types
 
 class rankings():
+    """Sorted fixed-size array"""
+
     def __init__(self, size):
         self._len = size
         self._lst = list()

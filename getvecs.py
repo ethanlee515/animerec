@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-
+"""
+usage: ./getvecs.py logfile.txt vecs.json
+Pops the first 5 users from logfile.txt, convert them to vectors, and add them to vecs.json
+"""
 import sys
 import json
 import animelist
@@ -12,7 +15,7 @@ with open(sys.argv[1]) as f:
     users = []
     for line in f:
         users.append(line.strip())
-    
+
 with open(sys.argv[1], "w") as f:
     for user in users[5:]:
         f.write(user + '\n')
@@ -29,4 +32,3 @@ with open(sys.argv[2], "w+") as f:
     json.dump(d, f)
 
 print("total users collected: " + str(len(d)))
-

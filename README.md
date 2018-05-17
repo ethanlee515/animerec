@@ -7,12 +7,10 @@
 
 ## How to run
 
-Two usages.
-* `./animerec.py <username>` (I.e.: `./animerec.py ethan515`)
-Prints the top five recommendations for a user.
-* `./animerec.py <username> <series ID>` (I.e.: `./animerec.py ethan515 23273`)
+* `./animerec.py <username>` Prints the top five recommendations for a user.
+* `./animerec.py <username> <series_ID>`
 Predicts the rating a given user would give to a series.
-The series ID being the number in the URL of the MyAnimeList page for the series.
+The series ID is the number in the URL of the MyAnimeList page for the series.
 This could be used for evaluation purposes.
 
 ## Abstract
@@ -35,11 +33,13 @@ series they haven’t watched based on the (normalized) average rating given by 
 The method of calculating similarity will be dot-product, as it is not sensitive to the norm of the
 vector, which represents the number of series a user has watched.
 
+Docstrings are available describing every source file.
+
 ## Evaluation
 
 We will evaluate the success of the project by repeatedly picking a random target user, removing one of
 their watched series’ ratings, and then predicting their rating using the algorithm outlined above. We
-will then compare the predicted rating and the actual rating.
+will then compare the predicted rating and the actual rating. Please see RESULTS.md for the result.
 
 ## Assessment of risk
 
@@ -48,3 +48,9 @@ crawled by the website’s robots.txt file. We will aim to extract approximately
 which would be equivalent to roughly 50 profiles per hour, or less than one user per minute on average,
 which is comparable to, if not slower than, what a human would be expected to be able to do. We will
 access the website once every 10 minutes, each time extracting at most 20 profiles.
+
+## Future Directions
+
+It might be nice to explore something in the spirit of IDF-weighing.
+That is, possibly assign popular series lower weights for the closest-neighbors
+algorithm and see if it improves the evaluation.
