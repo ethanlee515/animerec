@@ -7,20 +7,15 @@
 
 ## How to run
 
-* `./animerec.py <username>` Prints the top five recommendations for a user.
-* `./animerec.py <username> <series_ID>`
-Predicts the rating a given user would give to a series.
+* `./animerec.py <username>` prints the top five recommendations for a user.
+* `./animerec.py <username> <series_ID>` predicts the rating a given user would give to a series.
 The series ID is the number in the URL of the MyAnimeList page for the series.
-This could be used for evaluation purposes.
+This may be used for evaluation purposes.
 
 ## Abstract
 
 For our final project, we plan to set up a recommendation system for anime television series based on
-the watch history of users who share similar tastes to the target user. If time permits, we will also allow
-additional features such as an option for people to choose recommendations either from all users or
-only users who have watched a similar number of series, multiple target users in case people might
-want to look for recommendations for series to watch with friends, and genre filters that will allow
-people to find recommendations of a certain type.
+the watch histories of users who share similar tastes to the target user.
 
 ## Algorithm
 
@@ -33,13 +28,20 @@ series they haven’t watched based on the (normalized) average rating given by 
 The method of calculating similarity will be dot-product, as it is not sensitive to the norm of the
 vector, which represents the number of series a user has watched.
 
-Docstrings are available describing every source file.
+Additionally, for predicted ratings, we will implement a critical popularity feature that checks to see
+how many of the neighboring users have watched the given series. If the number of neighbors that have
+watched the series is below 10, this might cause the predicted rating to be less accurate, as there is
+less data from which to calculate the predicted rating. As a result, the program will output a warning
+that tells the user that the series is comparatively unpopular, and that results should be taken
+into context.
+
+Docstrings are available to describe the functions of each source file.
 
 ## Evaluation
 
 We will evaluate the success of the project by repeatedly picking a random target user, removing one of
 their watched series’ ratings, and then predicting their rating using the algorithm outlined above. We
-will then compare the predicted rating and the actual rating. Please see RESULTS.md for the result.
+will then compare the predicted rating and the actual rating. Please see RESULTS.md for the results.
 
 ## Assessment of risk
 
@@ -51,6 +53,9 @@ access the website once every 10 minutes, each time extracting at most 20 profil
 
 ## Future Directions
 
-It could be nice to explore something similar to IDF-weighing.
-That is, possibly assign popular series lower weights for the closest-neighbors
-algorithm and see if it improves the evaluation.
+If time permits, we could explore something similar to IDF-weighting. This could be done by
+assigning popular series lower weights for the closest-neighbors algorithm to see if it improves the evaluation.
+We could also explore additional options for people to choose recommendations either from all users or
+only users who have watched a similar number of series, multiple target users in case people might
+want to look for recommendations for series to watch with friends, or genre filters that will allow
+people to find recommendations of a certain type.
