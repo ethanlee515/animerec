@@ -32,7 +32,7 @@ Additionally, for predicted ratings, we will implement a critical popularity fea
 how many of the neighboring users have watched the given series. If the number of neighbors that have
 watched the series is below 10, this might cause the predicted rating to be less accurate, as there is
 less data from which to calculate the predicted rating. As a result, the program will output a warning
-that tells the user that the series is comparatively unpopular, and that results should be taken
+that tells the user that the series is comparatively unpopular, and that those results should be taken
 into context.
 
 Docstrings are available to describe the functions of each source file.
