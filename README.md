@@ -12,6 +12,9 @@
 The series ID is the number in the URL of the MyAnimeList page for the series.
 This may be used for evaluation purposes.
 
+***If this stops working, chances are myanimelist.net may have changed their website format.
+When that happens, unfortunately this repository is no longer actively maintained.***
+
 ## Abstract
 
 For our final project, we plan to set up a recommendation system for anime television series based on
